@@ -11,7 +11,7 @@ from os import makedirs
 
 class RatsRetriever(praw.Reddit):
     def __init__(self):
-        super().__init__("bot1", user_agent="PC:whatthehellisanappid:v1.0 (bt /u/recyclebin_was_taken")
+        super().__init__("bot1", user_agent="user agent here")
         self._sub = self.subreddit("RATS")
         self.last_posts = []
         for submission in self._sub.hot(limit=10):
