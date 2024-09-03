@@ -6,7 +6,7 @@ import requests
 import urllib.request
 from json import dump
 import hashlib
-from pprint import pprint
+from os import makedirs
 
 
 class RatsRetriever(praw.Reddit):
@@ -42,8 +42,13 @@ class RatsRetriever(praw.Reddit):
     @staticmethod
     def download_submissions(submission):
         if submission.is_video is True:
-            urllib.request.urlretrieve(submission.secure_media['reddit_video']['fallback_url'],
+            try:
+                urllib.request.urlretrieve(submission.secure_media['reddit_video']['fallback_url'],
                                        f"cache/{hash(submission)}.mp4")
+            except FileNotFoundError:
+                makedirs("cache")
+                urllib.request.urlretrieve(submission.secure_media['reddit_video']['fallback_url'],
+                                           f"cache/{hash(submission)}.mp4")
 
         elif submission.is_gallery is True:
             gallery_name = hashlib.md5(bytes(submission, "utf-8"))
