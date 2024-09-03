@@ -54,7 +54,7 @@ async def main(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 if __name__ == "__main__":
-    token = "5759303926:AAEgT8GzM7K9IfUHKDR8APJU1nLladn0VMU"
+    token = "insert telegram bot token here"
     app = ApplicationBuilder().token(token).build()
     app.add_handler(MessageHandler(filters.Text(["start"]), main))
     app.run_polling()
